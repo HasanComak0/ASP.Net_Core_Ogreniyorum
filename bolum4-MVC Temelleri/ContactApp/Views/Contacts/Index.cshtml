@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Contact> //Controller üzerinden gelen gelen veriyi yakaladık
+<h1>Index (@Model.Count()) </h1>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>E-posta</th>
+                <th>Telefon</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Contact c in Model)
+            {
+                <tr>
+                    <td>@c.FirstName</td>
+                    <td>@c.LastName</td>
+                    <td>@c.Email</td>
+                    <td>@c.Phone</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
