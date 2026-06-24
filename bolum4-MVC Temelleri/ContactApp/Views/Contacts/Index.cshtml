@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<Contact> //Controller üzerinden gelen gelen veriyi yakaladık
 <h1>Index (@Model.Count()) </h1>
 
-<div class="col-auto ms-auto">
-    <a asp-controller="Contacts" asp-action="Create" class="btn btn-success">+ Yeni Kişi</a>
-</div>
+<form method="get" asp-controller="Contacts" asp-action="Index" class="row g-2 mb-3">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+        <input type="text" name="q" value="@((string?)ViewBag.Query)" class="form-control" placeholder="Arama Yapabilirsiniz"/><!--?????????????-->
+    </div>
+
+    <div class="col-auto ms-auto">
+        <a asp-controller="Contacts" asp-action="Create" class="btn btn-success">+ Yeni Kişi</a>
+    </div>
+</form>
 
 <div class="table-responsive">
     <table class="table table-hover align-middle">
@@ -18,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(Contact c in Model)
+            @foreach (Contact c in Model)
             {
                 <tr>
                     <td>@c.FirstName</td>
@@ -34,8 +40,10 @@
             }
         </tbody>
     </table>
-    @if(!Model.Any())
+    @if (!Model.Any())
     {
-         <div class="alert alert-warning">Kayıt Bulunamadı.</div><!--contact boşsa yani kayıt yoksa mesaj atıyo-->  
+        <div class="alert alert-warning">Kayıt Bulunamadı.</div>
+    
+        <!--contact boşsa yani kayıt yoksa mesaj atıyo-->
     }
 </div>

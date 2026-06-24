@@ -18,9 +18,22 @@ namespace ContactApp.Controllers
         }
 
         //Dependency Injection - Resolve
-        public IActionResult Index()//index tanımı default geldi
+        [HttpGet("")]//bu direk controller üzerindeki Index demek
+        public IActionResult Index(string? q)//index tanımı default geldi
         {
             var items = _repo.GetAll();
+            if (!string.IsNullOrEmpty(q))//q boş değilse
+            {
+                var term = q.Trim();
+                items = items.Where(c =>
+                (c.FirstName + " " + c.LastName).Contains(term, StringComparison.CurrentCultureIgnoreCase)
+                || c.FirstName.Contains(term, StringComparison.CurrentCultureIgnoreCase)
+                || c.LastName.Contains(term, StringComparison.CurrentCultureIgnoreCase)
+                );
+            }
+            ViewData["Title"] = "Kişiler";
+            ViewBag.Query = q;
+
             return View(items.ToList());//Burda Controller üzerinden View'e veri gönderdim
         }
         public IActionResult Details(int id)//endpoint tanımı; Bir kişinin idye bağlı olarak gelecek olan bilgileri...
@@ -82,7 +95,7 @@ namespace ContactApp.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Geçersiz istek!");
             }
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 ViewData["Title"] = "Kişi Güncelle";
                 return View(contact);
@@ -117,7 +130,7 @@ namespace ContactApp.Controllers
         public IActionResult DeleteConfirm(int id)//kişi silme onay
         {
             var ok = _repo.Delete(id);
-            if(!ok)
+            if (!ok)
                 return NotFoundView();
 
             TempData["Success"] = "Kayıt Silindi";//bununla galiba _Layout.cshtml'e mesaj gönderiyoz o da tarayıcıda mesaj atıyo
