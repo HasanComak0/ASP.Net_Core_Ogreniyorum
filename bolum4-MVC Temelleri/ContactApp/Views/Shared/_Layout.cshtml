@@ -32,6 +32,26 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if(TempData["Success"] is string s)//bunları sonradan ekledik ne sike yarıyo anlamamışke
+            {
+                <div class="alert alert-success">
+                    @s
+                </div>
+            }
+
+            @if (TempData["Warning"] is string w)//galiba bu warninglerin falan içi doluysa divler ekrana geliyomuş
+            {
+                <div class="alert alert-warning">
+                    @w
+                </div>
+            }
+
+            @if (TempData["Error"] is string e)
+            {
+                <div class="alert alert-danger">
+                    @e
+                </div>
+            }
             @RenderBody()
         </main>
     </div>
