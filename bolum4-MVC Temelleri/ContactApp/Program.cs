@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);//uygulama oluþturuluyor
 builder.Services.AddControllersWithViews();//Servis kaydý yapýlýyo. Controller yapýlarýný bu projede kullanýcam demek
 
 
+//ContactsControllerda _repo diye interface oluþturuldu ya bu kod da o interface tanýmlandýðýnda InMemoryContactRepository dosyasýný kulan demek
 //Dependency Injection - Register || kullanýcýlarý kaydetmek gibi biþey
 builder.Services.AddSingleton<IContactRepository, InMemoryContactRepository>();
 //IContactRepository ne zaman enjekte edilirse InMemoryContactRepository'i Newlenecek bu saydece uygulama bize bir referans vericek

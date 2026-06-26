@@ -11,6 +11,7 @@ namespace ContactApp.Controllers
         private readonly ILogger<ContactsController> _logger;//bunu da newlememiz lazım //bu dalga console'a log basıyo amk
 
         //Constructor Injection yapmış olduk
+        //<ContactsController> kısmı, bu logun hangi sınıftan geldiğini etiketlemek için kullanılır
         public ContactsController(IContactRepository repo, ILogger<ContactsController> logger)//o yüzden bu sınıfın Constructorunda newleme işlemi yaptık
         {
             _repo = repo;
